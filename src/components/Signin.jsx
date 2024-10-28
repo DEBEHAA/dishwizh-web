@@ -16,8 +16,8 @@ import {
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import axios from 'axios'; 
-import img from './img.jpg'; 
+import axios from 'axios';
+import img from './img.jpg';
 
 const Signin = () => {
   const [formData, setFormData] = useState({
@@ -25,14 +25,12 @@ const Signin = () => {
     password: '',
   });
   const [error, setError] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // State to handle password visibility
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   // Toggle password visibility
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  const handleMouseDownPassword = (event) => event.preventDefault();
 
   // Handle input change
   const handleChange = (e) => {
@@ -44,9 +42,15 @@ const Signin = () => {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData);
-      alert('Login successful');
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      navigate('/*');
+
+      // Assuming the backend returns an object with `userId`
+      const userId = res.data.userId; // Make sure your backend is sending `userId` in the response
+
+      // Store userId in localStorage
+      localStorage.setItem('userId', userId);
+
+      // Redirect to user details page
+      navigate('/userdetails');
     } catch (err) {
       setError('Login failed. Invalid credentials.');
     }
@@ -54,10 +58,10 @@ const Signin = () => {
 
   return (
     <Container
-      maxWidth="false"
+      maxWidth={false}
       disableGutters
       sx={{
-        backgroundImage: `url(${img})`, 
+        backgroundImage: `url(${img})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',
@@ -71,20 +75,23 @@ const Signin = () => {
           padding: 4,
           borderRadius: 2,
           boxShadow: 3,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent white to make text readable
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
           maxWidth: 400,
-          width: '100%', // Make sure it adapts well to mobile screens
+          width: '100%',
         }}
       >
         <Typography variant="h4" align="center" gutterBottom sx={{ color: '#1976d2' }}>
           Sign In to DishWizh
         </Typography>
-        {error && <Typography color="error" align="center">{error}</Typography>}
         
+        {error && (
+          <Typography color="error" align="center" sx={{ mb: 2 }}>
+            {error}
+          </Typography>
+        )}
+
         <form onSubmit={handleSubmit}>
-          {/* Custom Email Field */}
           <TextField
-            id="input-with-icon-textfield"
             label="Email"
             name="email"
             type="email"
@@ -104,13 +111,9 @@ const Signin = () => {
             margin="normal"
           />
 
-          {/* Custom Password Field */}
           <FormControl sx={{ my: 2 }} fullWidth variant="outlined">
-            <InputLabel size="small" htmlFor="outlined-adornment-password">
-              Password
-            </InputLabel>
+            <InputLabel size="small">Password</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-password"
               type={showPassword ? 'text' : 'password'}
               name="password"
               size="small"
@@ -133,21 +136,17 @@ const Signin = () => {
             />
           </FormControl>
 
-          {/* Submit Button */}
           <Button
             type="submit"
-            variant="outlined"
-            color="info"
-            size="small"
-            disableElevation
+            variant="contained"
+            color="primary"
             fullWidth
             sx={{ my: 2 }}
           >
             Sign In
           </Button>
 
-          {/* Links */}
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
             <Link href="/forgot-password" variant="body2">
               Forgot password?
             </Link>
