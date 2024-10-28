@@ -55,6 +55,8 @@ const Pages = () => {
 
                     {/* User Details Page */}
                     <Route path="/userdetails" element={<UserDetails />} /> 
+                    {/* Recipe adding Page */}
+                    <Route path="/addreciepe" element={<UserDetails />} />
                 </Routes>
             </div>
         </>

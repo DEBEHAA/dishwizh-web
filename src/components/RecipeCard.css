@@ -1,87 +1,95 @@
-.recipe-img 
-{
+/* Recipe Image */
+.recipe-img {
     object-fit: cover;
     height: 200px;
-    width: 300px;
-    border-radius: 10px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
 }
-.recipe-p 
-{
+
+/* Recipe Title */
+.recipe-p {
     color: #fff;
-    padding:0px 15px;
+    padding: 10px 15px;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: no-wrap;
-    height: 80px;
-    z-index: 3;
-    border-radius: 10px;
-    width: 300px;
+    white-space: nowrap;
+    height: 60px;
+    z-index: 2;
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: bold;
     letter-spacing: 1px;
 }
-.recipe-card-container 
-{
-    display: flex;
-    flex-direction: column;
-    object-fit: cover;
-    object-position: center;
+
+/* Recipe Card Container */
+.recipe-card-container {
     position: relative;
+    width: 300px;
+    margin: 20px;
     border-radius: 10px;
-    transition: all 100ms ease-in-out;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    margin: 20px 0;
-    color:white;
-    animation: fade-in 300ms linear;
+    animation: fade-in 300ms ease-in-out;
+    background-color: #fff; /* Ensures background on hover */
 }
+
+.recipe-card-container:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Fade-in Animation */
 @keyframes fade-in {
     0% {
         top: 40px;
         opacity: 0;
     }
     100% {
-        top:0;
+        top: 0;
         opacity: 1;
     }
 }
-.recipe-card-container:hover 
-{
-    transform: scale(0.97);
-}
-.recipe-gradient
-{
-    height: 200px;
-    width: 300px;
+
+/* Gradient Overlay */
+.recipe-gradient {
     position: absolute;
-    border-radius: 10px;
-    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.9));
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    z-index: 1;
 }
 
-.splide__arrow.splide__arrow--prev {
-    left: 1230px;
-    top:-25px
-}
-
-.splide__arrow.splide__arrow--next {
-    right: 10px; 
-    top:-25px
-}
-
-
+/* Favorite Icon */
 .favorite-icon {
     position: absolute;
     top: 10px;
     right: 10px;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
+    color: rgb(13, 13, 13);
+    font-size: 24px;
+    transition: color 0.3s ease;
 }
 
 .favorite-icon .favorite {
     color: red;
-    font-size: 24px;
 }
 
 .favorite-icon .not-favorite {
-    color: rgb(13, 13, 13);
-    font-size: 24px;
+    color: rgb(0, 0, 0);
+}
+
+/* Slider Arrows Customization */
+.splide__arrow.splide__arrow--prev {
+    left: 20px;
+    top: -25px;
+}
+
+.splide__arrow.splide__arrow--next {
+    right: 20px;
+    top: -25px;
 }

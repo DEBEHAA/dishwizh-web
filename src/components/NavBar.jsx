@@ -40,19 +40,17 @@ const NavBar = () => {
   
     const navLinks = (
         <>
-            <Button component={Link} to="/" sx={{ color: '#fff', marginRight: 2 }}>
+            <Button component={Link} to="/*" sx={{ color: '#fff', marginRight: 2 }}>
                 Home
             </Button>
             <Button component={Link} to="/favorites" sx={{ color: '#fff', marginRight: 2 }}>
                 Favorites
             </Button>
+            <Button component={Link} to="/addrecipe" sx={{ color: '#fff', marginRight: 2 }}>
+                Add Recipe
+            </Button>
             <Button component={Link} to="/userdetails" sx={{ color: '#fff', marginRight: 2 }}>
                 User Details
-            </Button>
-           
-           
-            <Button component={Link} to="/register" sx={{ color: '#fff' }}>
-                        Register
             </Button>
             <Button component={Link} to="/" onClick={handleLogout} sx={{ color: '#fff', marginRight: 2 }}>
                         Logout
