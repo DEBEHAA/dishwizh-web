@@ -9,6 +9,7 @@ import Recipe from "./Recipe";
 import Header from "../components/Header";
 import Favorites from "./Favorites";  // Import Favorites component
 import UserDetails from './Userdetails';  // Import UserDetails component
+import AddRecipe from './AddRecipe';
 
 const Pages = () => {
     return (
@@ -56,7 +57,7 @@ const Pages = () => {
                     {/* User Details Page */}
                     <Route path="/userdetails" element={<UserDetails />} /> 
                     {/* Recipe adding Page */}
-                    <Route path="/addreciepe" element={<UserDetails />} />
+                    <Route path="/addrecipe" element={<AddRecipe />} />
                 </Routes>
             </div>
         </>

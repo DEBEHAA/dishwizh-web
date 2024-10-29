@@ -72,20 +72,11 @@ const NavBar = () => {
             <ListItem button component={Link} to="/user">
                 <ListItemText primary="User Details" />
             </ListItem>
-            {isLoggedIn ? (
+            
                 <ListItem button onClick={handleLogout}>
                     <ListItemText primary="Logout" />
                 </ListItem>
-            ) : (
-                <>
-                    <ListItem button component={Link} to="/login" onClick={handleLogin}>
-                        <ListItemText primary="Login" />
-                    </ListItem>
-                    <ListItem button component={Link} to="/register">
-                        <ListItemText primary="Register" />
-                    </ListItem>
-                </>
-            )}
+          
         </List>
     );
 

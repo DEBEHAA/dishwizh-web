@@ -50,7 +50,7 @@ const Signin = () => {
       localStorage.setItem('userId', userId);
 
       // Redirect to user details page
-      navigate('/userdetails');
+      navigate('/*');
     } catch (err) {
       setError('Login failed. Invalid credentials.');
     }
