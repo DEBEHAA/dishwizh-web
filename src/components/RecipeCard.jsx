@@ -6,36 +6,44 @@ import './RecipeCard.css';
 
 const RecipeCard = ({ data }) => {
     const [isFavorite, setIsFavorite] = useState(false);
-    const recipeId = data.isCustom ? data._id : data.id;
 
+    // Check if the recipe is a favorite when the component mounts
     useEffect(() => {
         const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-        const isRecipeFavorite = storedFavorites.some(recipe => recipe.id === recipeId);
+        const isRecipeFavorite = storedFavorites.some(recipe => recipe.id === data.id || recipe._id === data._id);
         setIsFavorite(isRecipeFavorite);
-    }, [recipeId]);
+    }, [data.id, data._id]);
 
+    // Handle toggling favorite status in localStorage
     const handleFavoriteToggle = () => {
         const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
         
         let updatedFavorites;
         if (isFavorite) {
-            updatedFavorites = storedFavorites.filter(recipe => recipe.id !== recipeId);
+            // Remove from favorites
+            updatedFavorites = storedFavorites.filter(recipe => recipe.id !== data.id && recipe._id !== data._id);
         } else {
-            updatedFavorites = [...storedFavorites, { ...data, id: recipeId }];
+            // Add to favorites
+            updatedFavorites = [...storedFavorites, data];
         }
 
+        // Update local storage and state
         localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         setIsFavorite(!isFavorite);
     };
 
+    // Determine the image source
+    const imageSrc = data.isCustom ? `http://localhost:5000${data.imageUrl}` : data.image;
+
     return (
         <div className="recipe-card-container">
-            <Link to={data.isCustom ? `/myrecipe/${recipeId}` : `/recipe/${recipeId}`}>
-                <img src={data.isCustom ? data.imageUrl : data.image} className="recipe-img" alt={data.title || data.recipeName} />
+            <Link to={`/recipe/${data.id || data._id}`}>
+                <img src={imageSrc} className="recipe-img" alt={data.title || data.recipeName} />
                 <h2 className="recipe-p">{data.title || data.recipeName}</h2>
                 <div className="recipe-gradient"></div>
             </Link>
 
+            {/* Favorite Icon */}
             <div className="favorite-icon" onClick={handleFavoriteToggle}>
                 {isFavorite ? (
                     <Favorite className="favorite" style={{ color: 'red', fontSize: '24px' }} />
