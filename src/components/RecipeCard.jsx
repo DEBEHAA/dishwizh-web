@@ -33,7 +33,7 @@ const RecipeCard = ({ data }) => {
     };
 
     // Determine the image source
-    const imageSrc = data.isCustom ? `http://localhost:5000${data.imageUrl}` : data.image;
+    const imageSrc = data.isCustom ? `https://dishwizh-api-1.onrender.com:10000${data.imageUrl}` : data.image;
 
     return (
         <div className="recipe-card-container">
