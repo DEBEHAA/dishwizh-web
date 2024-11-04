@@ -38,7 +38,7 @@ const UserDetails = () => {
         return;
       }
       try {
-        const response = await axios.get(`https://dishwizh-api-1.onrender.com:10000/api/chef/${userId}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/chef/${userId}`);
         if (response.data) {
           setUserData(response.data); // Populate form with existing data
           setIsNewUser(false); // Set to update mode
@@ -75,10 +75,10 @@ const UserDetails = () => {
 
     try {
       if (isNewUser) {
-        await axios.post(`https://dishwizh-api-1.onrender.com:10000/api/chef/${userId}`, userData);
+        await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/chef/${userId}`, userData);
         setMessage('User details added successfully!');
       } else {
-        await axios.put(`https://dishwizh-api-1.onrender.com:10000/api/chef/${userId}`, userData);
+        await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/chef/${userId}`, userData);
         setMessage('User details updated successfully!');
       }
       setIsNewUser(false);
